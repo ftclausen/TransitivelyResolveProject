@@ -1,38 +1,17 @@
-buildscript {
-  configurations.all {
-    resolutionStrategy {
-      cacheChangingModulesFor 0, 'seconds'
+allprojects {
+  apply plugin: 'java'
+  configurations {
+    sub0Conf { 
+      description = 'Configuration used in sub0 sub-project'
+      transitive = true
+    }
+    rootProjectConf { 
+      description = 'Configuration used in root project' 
+      transitive = true
     }
   }
-  repositories {
-    mavenLocal()
-    maven {
-      url 'http://maven.bbpd.io/content/groups/public'
-    }
-  }
-  dependencies {
-    classpath group: 'blackboard.internal', name: 'blackboard-gradle-plugin', version: '2.9.0-SNAPSHOT', changing: true
-    classpath 'com.netflix.nebula:gradle-dependency-lock-plugin:3.1.0'
-  }
-}
-
-// Uncomment/comment the below to break/fix usage of a configuration called "install"
-/* 
-apply plugin: 'bbapi' // TODO need to be able to apply common base conventions, without anything else - a 'base' plugin perhaps?
-group 'blackboard.experimental'
-learnRelease '1.2.3'
-version '1.2.3'
-semanticVersion.useVersion project.version
-*/
-
-configurations {
-  install
 }
 
 dependencies {
-  install 'commons-cli:commons-cli:1.+'
-}
-
-task Hello << {
-  println "hello ${configurations.install.name}"
+  rootProjectConf project(':sub0')
 }

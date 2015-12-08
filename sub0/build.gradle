@@ -1,1 +1,7 @@
-println "sub0"
+dependencies {
+ sub0Conf 'org.jmock:jmock-junit4:2.8.1'
+}
+
+task hello {
+  println "hello"
+}
