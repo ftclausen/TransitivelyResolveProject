@@ -16,19 +16,21 @@ buildscript {
   }
 }
 
+// Uncomment/comment the below to break/fix usage of a configuration called "install"
+/* 
 apply plugin: 'bbapi' // TODO need to be able to apply common base conventions, without anything else - a 'base' plugin perhaps?
-
 group 'blackboard.experimental'
 learnRelease '1.2.3'
 version '1.2.3'
 semanticVersion.useVersion project.version
+*/
 
 configurations {
   install
 }
 
 dependencies {
-  install 'com.netflix.nebula:gradle-dependency-lock-plugin:3.1.0'
+  install 'commons-cli:commons-cli:1.+'
 }
 
 task Hello << {
