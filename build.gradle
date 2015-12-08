@@ -1,0 +1,36 @@
+buildscript {
+  configurations.all {
+    resolutionStrategy {
+      cacheChangingModulesFor 0, 'seconds'
+    }
+  }
+  repositories {
+    mavenLocal()
+    maven {
+      url 'http://maven.bbpd.io/content/groups/public'
+    }
+  }
+  dependencies {
+    classpath group: 'blackboard.internal', name: 'blackboard-gradle-plugin', version: '2.9.0-SNAPSHOT', changing: true
+    classpath 'com.netflix.nebula:gradle-dependency-lock-plugin:3.1.0'
+  }
+}
+
+apply plugin: 'bbapi' // TODO need to be able to apply common base conventions, without anything else - a 'base' plugin perhaps?
+
+group 'blackboard.experimental'
+learnRelease '1.2.3'
+version '1.2.3'
+semanticVersion.useVersion project.version
+
+configurations {
+  install
+}
+
+dependencies {
+  install 'com.netflix.nebula:gradle-dependency-lock-plugin:3.1.0'
+}
+
+task Hello << {
+  println "hello ${configurations.install.name}"
+}
